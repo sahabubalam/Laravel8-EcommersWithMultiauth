@@ -5,6 +5,9 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\CouponController;
 use App\Http\Controllers\Admin\SizeController;
+use App\Http\Controllers\Admin\ColorController;
+use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\FileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -52,4 +55,26 @@ Route::group(['namespace' => 'App\HttpControllers\Admin', 'middleware' => 'is_ad
     Route::get('/admin/size-edit/{id}', [SizeController::class, 'editSize']);
     Route::post('/admin/update-size', [SizeController::class, 'sizeUpdate'])->name('size.update');
     Route::get('/admin/size/status/{status}/{id}', [SizeController::class, 'status']);
+    //color controller
+    Route::get('/admin/color-list', [ColorController::class, 'index']);
+    Route::get('/admin/add-color', [ColorController::class, 'addColor']);
+    Route::post('/admin/insert-color', [ColorController::class, 'colorInsert'])->name('color.insert');
+    Route::get('/admin/color-delete/{id}', [ColorController::class, 'delete']);
+    Route::get('/admin/color-edit/{id}', [ColorController::class, 'editColor']);
+    Route::post('/admin/update-color', [ColorController::class, 'colorUpdate'])->name('color.update');
+    Route::get('/admin/color/status/{status}/{id}', [ColorController::class, 'status']);
+    //product controller
+    Route::get('/admin/product-list', [ProductController::class, 'index']);
+    Route::get('/admin/add-product', [ProductController::class, 'addProduct']);
+    Route::post('/admin/insert-product', [ProductController::class, 'productInsert'])->name('product.insert');
+    Route::get('/admin/product-delete/{id}', [ProductController::class, 'delete']);
+    Route::get('/admin/product-edit/{id}', [ProductController::class, 'editproduct']);
+    Route::post('/admin/update-product', [ProductController::class, 'productUpdate'])->name('product.update');
+    //file controller
+    Route::get('/admin/add-file', [FileController::class, 'index']);
+    Route::post('/admin/image', [FileController::class, 'store'])->name('insert.image');
+    Route::get('/admin/file-list', [FileController::class, 'list']);
+    Route::get('/admin/file-edit/{id}', [FileController::class, 'editFile']);
+    Route::post('/admin/update-file', [FileController::class, 'fileUpdate'])->name('file.update');
+    Route::get('/admin/file-delete/{id}', [FileController::class, 'delete']);
  });

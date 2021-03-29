@@ -202,6 +202,24 @@
               <p>Size </p>
             </a>
           </li>
+          <li class="nav-item">
+            <a href="/admin/color-list" class="nav-link">
+              <i class="nav-icon fas fa-paint-brush"></i>
+              <p>Color </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="/admin/product-list" class="nav-link">
+              <i class="nav-icon fas fa-window-maximize"></i>
+              <p>Product </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="/admin/file-list" class="nav-link">
+              <i class="nav-icon fas fa-window-maximize"></i>
+              <p>File List </p>
+            </a>
+          </li>
           
         </ul>
       </nav>
@@ -237,7 +255,7 @@
 <!-- ChartJS -->
 <script src="{{asset('backend/plugins/chart.js/Chart.min.js')}}"></script>
 <!-- Sparkline -->
-<script src="{{asset('backend/plugins/sparklines/sparkline.js')}}"></script>
+{{-- <script src="{{asset('backend/plugins/sparklines/sparkline.js')}}"></script> --}}
 <!-- JQVMap -->
 <script src="{{asset('backend/plugins/jqvmap/jquery.vmap.min.js')}}"></script>
 <script src="{{asset('backend/plugins/jqvmap/maps/jquery.vmap.usa.js')}}"></script>
