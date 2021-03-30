@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\SizeController;
 use App\Http\Controllers\Admin\ColorController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\FileController;
+use App\Http\Controllers\Admin\BrandController;
 
 /*
 |--------------------------------------------------------------------------
@@ -70,6 +71,7 @@ Route::group(['namespace' => 'App\HttpControllers\Admin', 'middleware' => 'is_ad
     Route::get('/admin/product-delete/{id}', [ProductController::class, 'delete']);
     Route::get('/admin/product-edit/{id}', [ProductController::class, 'editproduct']);
     Route::post('/admin/update-product', [ProductController::class, 'productUpdate'])->name('product.update');
+    Route::get('/admin/product/status/{status}/{id}', [ProductController::class, 'status']);
     //file controller
     Route::get('/admin/add-file', [FileController::class, 'index']);
     Route::post('/admin/image', [FileController::class, 'store'])->name('insert.image');
@@ -77,4 +79,12 @@ Route::group(['namespace' => 'App\HttpControllers\Admin', 'middleware' => 'is_ad
     Route::get('/admin/file-edit/{id}', [FileController::class, 'editFile']);
     Route::post('/admin/update-file', [FileController::class, 'fileUpdate'])->name('file.update');
     Route::get('/admin/file-delete/{id}', [FileController::class, 'delete']);
+    //brand controller
+    Route::get('/admin/brand-list', [BrandController::class, 'index']);
+    Route::get('/admin/add-brand', [BrandController::class, 'addBrand']);
+    Route::post('/admin/insert-brand', [BrandController::class, 'brandInsert'])->name('brand.insert');
+    Route::get('/admin/brand-delete/{id}', [BrandController::class, 'delete']);
+    Route::get('/admin/brand-edit/{id}', [BrandController::class, 'editBrand']);
+    Route::post('/admin/update-brand', [BrandController::class, 'brandUpdate'])->name('brand.update');
+    Route::get('/admin/brand/status/{status}/{id}', [BrandController::class, 'status']);
  });

@@ -2,19 +2,21 @@
 @section('page_title','Add-Product')
 
 @section('admin_content')
+<script src="{{asset('ckeditor/ckeditor.js')}}"></script>
 <div class="content-wrapper mt-5">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="{{asset('ckeditor/ckeditor.js')}}"></script>
     <!-- Main content -->
     <section class="content">
       <div class="container-fluid ">
         <div class="row d-felx justify-content-center">
           <!-- left column -->
-          <div class="col-md-8 ">
+          <div class="col-md-10 ">
            
             <div class="card card-primary">
               <div class="card-header">
-                <h3 class="card-title">Add Product</h3>
+                <h3 class="card-title">Edit Product</h3>
               </div>
              
               <form method="POST" action="{{route('product.update')}}" enctype="multipart/form-data">
@@ -47,20 +49,7 @@
                         <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
                  </div>
-                  <div class="form-group">
-                        <label>Size</label>
-                        <select class="form-control select2" name="size_id" style="width: 100%;">
-                        <option>select</option>
-                        @foreach ($size as $item)
-                        <option value="{{$item->id}}" <?php if($item->id==$product->size_id) echo "selected"; ?>>{{$item->size}}</option>
-                        @endforeach
-                       
-                        
-                        </select>
-                        @error('size_id')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                        @enderror
-                    </div>
+                 
                     <div class="row">
                         <div class="col-md-3">
                             <div class="form-group">
@@ -90,14 +79,77 @@
                             </div>
                         </div>
                         <div class="col-md-3">
-                            <div class="form-group">
-                                <label for="exampleInputPassword1">Brand</label>
-                                <input type="text" name="brand"  value="{{$product->brand}}" class="form-control @error('brand') is-invalid @enderror" id="brand" placeholder="brand">
-                                @error('brand')
-                                <div class="alert alert-danger">{{ $message }}</div>
-                                @enderror
-                            </div>
+                          <div class="form-group">
+                              <label for="exampleInputPassword1">Brand</label>
+                              <select class="form-control select2 @error('brand_id') is-invalid @enderror" name="brand_id" style="width: 100%;">
+                                <option selected="true" disabled>select</option>
+                                @foreach ($brand as $item)
+                                <option value="{{$item->id}}" <?php if($item->id==$product->brand_id) echo"selected";?>>{{$item->brand_name}}</option>
+                                @endforeach
+                                </select>
+                              @error('brand_id')
+                              <div class="alert alert-danger">{{ $message }}</div>
+                              @enderror
+                          </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-3">
+                        <div class="form-group">
+                          <label for="exampleInputPassword1">Lead Time</label>
+                          <input type="text" name="lead_time" value="{{$product->lead_time}}" class="form-control @error('lead_time') is-invalid @enderror" id="category_slug" placeholder="lead time">
+                          @error('lead_time')
+                          <div class="alert alert-danger">{{ $message }}</div>
+                          @enderror
+                      </div>
+                      </div>
+                      <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Featured</label>
+                            <select class="form-control select2 @error('is_featured') is-invalid @enderror" name="is_featured" style="width: 100%;">
+                              <option selected="true" disabled>select</option>
+                              <option value="0" <?php if($product->is_featured==0) echo "selected"; ?>>0</option>
+                              <option value="1" <?php if($product->is_featured==1) echo "selected"; ?>>1</option>
+                             
+                              @error('is_featured')
+                              <div class="alert alert-danger">{{ $message }}</div>
+                              @enderror
+                            </select>
+                            @error('is_featured')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
                         </div>
+                    </div>
+                    <div class="col-md-3">
+                      <div class="form-group">
+                        <label>Discount</label>
+                        <select class="form-control select2 @error('is_discounted') is-invalid @enderror" name="is_discounted" style="width: 100%;">
+                          <option selected="true" disabled>select</option>
+                          <option value="1" <?php if($product->is_discounted==0) echo "selected"; ?>>1</option>
+                          <option value="0" <?php if($product->is_discounted==1) echo "selected"; ?>>0</option>
+                         
+                          @error('is_discounted')
+                          <div class="alert alert-danger">{{ $message }}</div>
+                          @enderror
+                        </select>
+                      </div>
+                  </div>
+                  <div class="col-md-3">
+                    <div class="form-group">
+                      <label>Size</label>
+                      <select class="form-control select2 @error('size_id') is-invalid @enderror" name="size_id" style="width: 100%;">
+                      <option selected="true" disabled>select</option>
+                      @foreach ($size as $item)
+                      <option value="{{$item->id}}" <?php if($item->id==$product->size_id) echo "selected";?>>{{$item->size}}</option>
+                      @endforeach
+                     
+                      
+                      </select>
+                      @error('size_id')
+                          <div class="alert alert-danger">{{ $message }}</div>
+                      @enderror
+                  </div>
+                  </div>
                     </div>
                     <div class="form-group">
                         <label for="exampleInputPassword1">Product Name</label>
@@ -106,19 +158,23 @@
                         <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
                     </div>
+
                     <div class="form-group">
                       <label for="exampleInputPassword1">Image</label>
-                      <input type="file" name="file" class="form-control @error('image') is-invalid @enderror" id="image">
+                      <div class="upload-img">
+												<img id="img" style="max-width:100px;" src="{{asset('products')}}/{{$product->image}}" alt="doctor photo">
+											</div>
+                      <input type="file" name="file" class="form-control @error('image') is-invalid @enderror" onchange="readURL(this)">
                       @error('image')
                       <div class="alert alert-danger">{{ $message }}</div>
                       @enderror
                     </div>
                     <div class="item form-group">
-                        
                       <div class="col-md-6 col-sm-6 ">
                         <input type="hidden" name="old_image" class="form-control" value="{{$product->image}}" >
                       </div>
                     </div>
+                    
 
                   <div class="form-group">
                         <label for="exampleInputPassword1">Short Description</label>
@@ -131,7 +187,7 @@
                   </div>
                   <div class="form-group">
                     <label for="exampleInputPassword1"> Description</label>
-                    <textarea type="text" alue="{{$product->description}}" name="description" class="form-control @error('description') is-invalid @enderror" id="short_description">
+                    <textarea type="text" value="{{$product->description}}" name="description" class="form-control @error('description') is-invalid @enderror" id="short_description">
 
                     </textarea>   
                     @error('description')
@@ -196,5 +252,13 @@
           $(this).parents(".realprocode").remove();
       });
     });
+   
+  
+</script>
+<script type="text/javascript">
+ 
+  CKEDITOR.replace("short_description");
+   CKEDITOR.replace("description");
+ 
 </script>
   @endsection

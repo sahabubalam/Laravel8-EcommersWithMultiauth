@@ -10,6 +10,7 @@ use App\Models\Size;
 use App\Models\Color;
 use DB;
 use App\Models\File;
+use App\Models\Brand;
 
 class ProductController extends Controller
 {
@@ -26,7 +27,8 @@ class ProductController extends Controller
         $category=Category::all();
         $size=Size::all();
         $color=Color::all();
-        return view('admin.product.add-product',compact('size','color','category'));
+        $brand=Brand::all();
+        return view('admin.product.add-product',compact('size','color','category','brand'));
     }
     //inert product
     public function productInsert(Request $request)
@@ -36,6 +38,16 @@ class ProductController extends Controller
             'product_name' => 'required|max:255',
             'price' => 'required',
             'qty' => 'required',
+            'category_id' => 'required',
+            'brand_id' => 'required',
+            'color_id' => 'required',
+            'size_id' => 'required',
+            'short_description' => 'required',
+            'description' => 'required',
+            'slug' => 'required',
+            'lead_time' => 'required',
+            'is_featured' => 'required',
+            'is_discounted' => 'required',
            // 'photo' => 'required', 
             
             
@@ -45,12 +57,16 @@ class ProductController extends Controller
         $product->color_id=$request->color_id;
         $product->size_id=$request->size_id;
         $product->product_name=$request->product_name;
-        $product->brand=$request->brand;
+        $product->brand_id=$request->brand_id;
         $product->short_description=$request->short_description;
         $product->description=$request->description;
         $product->price=$request->price;
         $product->qty=$request->qty;
         $product->slug=$request->slug;
+
+        $product->lead_time=$request->lead_time;
+        $product->is_featured=$request->is_featured;
+        $product->is_discounted=$request->is_discounted;
         $product->status=1;
         $image=$request->file('file');
      
@@ -82,7 +98,7 @@ class ProductController extends Controller
             $request->session()->flash('message','Product deleted successfully');
             return redirect('/admin/product-list');
         }
-        $emplproductoyee->delete();
+        $product->delete();
         $request->session()->flash('message','Product deleted successfully');
         return redirect('/admin/product-list');
     }
@@ -91,9 +107,10 @@ class ProductController extends Controller
     {
         $product=Product::find($id);
         $category=Category::all();
+        $brand=Brand::all();
         $size=Size::all();
         $color=Color::all();
-        return view('admin.product.edit-product',compact('product','category','size','color'));
+        return view('admin.product.edit-product',compact('product','category','size','color','brand'));
     }
     //update product
     public function productUpdate(Request $request)
@@ -108,12 +125,15 @@ class ProductController extends Controller
         $product->color_id=$request->color_id;
         $product->size_id=$request->size_id;
         $product->product_name=$request->product_name;
-        $product->brand=$request->brand;
+        $product->brand_id=$request->brand_id;
         $product->short_description=$request->short_description;
         $product->description=$request->description;
         $product->price=$request->price;
         $product->qty=$request->qty;
         $product->slug=$request->slug;
+        $product->lead_time=$request->lead_time;
+        $product->is_featured=$request->is_featured;
+        $product->is_discounted=$request->is_discounted;
         $product->status=1;
         $image=$request->file('file');
         $model=$product->id;
@@ -154,8 +174,17 @@ class ProductController extends Controller
             $file->product_id=$model;
             //return response()->json($file);
             $file->save();
-            $request->session()->flash('message','Product inserted successfully');
+            $request->session()->flash('message','Product updated successfully');
            return redirect('/admin/product-list');
 
     }
+     //status update
+     public function status(Request $request,$status,$id)
+     {
+         $model=Product::find($id);
+         $model->status=$status;
+         $model->save();
+         $request->session()->flash('message','Product status updated');
+         return redirect('/admin/product-list');
+     }
 }

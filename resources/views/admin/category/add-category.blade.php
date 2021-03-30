@@ -25,7 +25,7 @@
                     @error('category_name')
                         <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
-                </div>
+                  </div>
                   <div class="form-group">
                     <label for="exampleInputPassword1">category Slug</label>
                     <input type="text" name="category_slug" class="form-control @error('category_slug') is-invalid @enderror" id="category_slug" placeholder="Category slug">

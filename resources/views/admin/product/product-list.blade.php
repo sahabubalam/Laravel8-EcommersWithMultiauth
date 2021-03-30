@@ -45,13 +45,12 @@
                 <table id="example1" class="table table-bordered table-striped">
                   <thead>
                   <tr>
-                    <th>Product Name</th>
-                    <th>Product qty</th>
-                    <th>Product size</th>
-                    <th>Product color</th>
-                    <th>Product image</th>
+                    <th>P Name</th>
+                    <th>P qty</th>
+                    <th>P size</th>
+                    <th>P color</th>
+                    <th>P image</th>
                     <th>Action</th>
-                    
                   </tr>
                   </thead>
                   <tbody>

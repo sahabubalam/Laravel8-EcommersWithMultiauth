@@ -25,6 +25,7 @@
   <link rel="stylesheet" href="{{asset('backend/plugins/daterangepicker/daterangepicker.css')}}">
   <!-- summernote -->
   <link rel="stylesheet" href="{{asset('backend/plugins/summernote/summernote-bs4.min.css')}}">
+
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
@@ -220,6 +221,12 @@
               <p>File List </p>
             </a>
           </li>
+          <li class="nav-item">
+            <a href="/admin/brand-list" class="nav-link">
+              <i class="nav-icon fas fa-window-maximize"></i>
+              <p>Brand </p>
+            </a>
+          </li>
           
         </ul>
       </nav>
@@ -255,7 +262,7 @@
 <!-- ChartJS -->
 <script src="{{asset('backend/plugins/chart.js/Chart.min.js')}}"></script>
 <!-- Sparkline -->
-{{-- <script src="{{asset('backend/plugins/sparklines/sparkline.js')}}"></script> --}}
+<script src="{{asset('backend/plugins/sparklines/sparkline.js')}}"></script>
 <!-- JQVMap -->
 <script src="{{asset('backend/plugins/jqvmap/jquery.vmap.min.js')}}"></script>
 <script src="{{asset('backend/plugins/jqvmap/maps/jquery.vmap.usa.js')}}"></script>
@@ -265,7 +272,7 @@
 <script src="{{asset('backend/plugins/moment/moment.min.js')}}"></script>
 <script src="{{asset('backend/plugins/daterangepicker/daterangepicker.js')}}"></script>
 <!-- Tempusdominus Bootstrap 4 -->
-<script src="{{asset('backend/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js')}}"></script>
+{{-- <script src="{{asset('backend/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js')}}"></script> --}}
 <!-- Summernote -->
 <script src="{{asset('backend/plugins/summernote/summernote-bs4.min.js')}}"></script>
 <!-- overlayScrollbars -->
@@ -276,5 +283,22 @@
 <script src="{{asset('backend/dist/js/demo.js')}}"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="{{asset('backend/dist/js/pages/dashboard.js')}}"></script>
+
+
+<script>
+   function readURL(el) {
+        if (el.files && el.files[0]) {
+         var FR= new FileReader();
+         FR.onload = function(e) {
+              $("img").attr("src", e.target.result);
+              socket.emit('image', e.target.result);
+              console.log(e.target.result);
+         };       
+         FR.readAsDataURL( el.files[0] );
+    } 
+};
+
+</script>
+
 </body>
 </html>

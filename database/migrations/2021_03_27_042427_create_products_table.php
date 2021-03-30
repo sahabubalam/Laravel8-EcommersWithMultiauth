@@ -19,7 +19,7 @@ class CreateProductsTable extends Migration
             $table->integer('color_id');
             $table->integer('size_id');
             $table->string('product_name');
-            $table->string('brand');
+            $table->integer('brand_id');
             $table->longText('short_description');
             $table->longText('description');
             $table->string('price');
@@ -27,6 +27,9 @@ class CreateProductsTable extends Migration
             $table->string('status');
             $table->string('slug');
             $table->string('image')->nullable();
+            $table->string('lead_time');
+            $table->integer('is_featured');
+            $table->string('is_discounted');
             $table->timestamps();
         });
     }
