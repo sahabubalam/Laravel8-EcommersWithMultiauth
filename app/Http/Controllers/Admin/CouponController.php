@@ -27,11 +27,17 @@ class CouponController extends Controller
             'title'=>'required',
             'code'=>'required|unique:coupons',
             'value'=>'required',
+            'type'=>'required',
+            'min_order_amount'=>'required',
+            'is_one_time'=>'required',
         ]);
         $model= new Coupon();
         $model->title=$request->title;
         $model->code=$request->code;
         $model->value=$request->value;
+        $model->type=$request->type;
+        $model->min_order_amount=$request->min_order_amount;
+        $model->is_one_time=$request->is_one_time;
         $model->status=1;
         $model->save();
        // return response()->json($model);
@@ -65,6 +71,9 @@ class CouponController extends Controller
         $model->title=$request->title;
         $model->code=$request->code;
         $model->value=$request->value;
+        $model->type=$request->type;
+        $model->min_order_amount=$request->min_order_amount;
+        $model->is_one_time=$request->is_one_time;
         $model->status=1;
         $model->save();
        // return response()->json($model);

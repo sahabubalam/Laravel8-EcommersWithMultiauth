@@ -8,7 +8,7 @@
       <div class="container-fluid ">
         <div class="row d-felx justify-content-center">
           <!-- left column -->
-          <div class="col-md-8 ">
+          <div class="col-md-10 ">
            
             <div class="card card-primary">
               <div class="card-header">
@@ -39,6 +39,35 @@
                     <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
                 </div>
+                <div class="form-group">
+                  <label for="exampleInputPassword1">Type </label>
+                  <select class="form-control @error('type') is-invalid @enderror" name="type">
+                    <option selected="true" disabled>select</option>
+                    <option value="value">Value</option>
+                    <option value="percent">Percent</option>
+                  </select>
+                  @error('type')
+                  <div class="alert alert-danger">{{ $message }}</div>
+                  @enderror
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputPassword1">Min Order Amount</label>
+                  <input type="text" name="min_order_amount" class="form-control @error('min_order_amount') is-invalid @enderror" id="category_slug" placeholder="value">
+                  @error('min_order_amount')
+                  <div class="alert alert-danger">{{ $message }}</div>
+                  @enderror
+              </div>
+              <div class="form-group">
+                <label for="exampleInputPassword1">Is One Time </label>
+                <select class="form-control @error('is_one_time') is-invalid @enderror" name="is_one_time">
+                  <option selected="true" disabled>select</option>
+                  <option value="1">YES</option>
+                  <option value="0">NO</option>
+                </select>
+                @error('is_one_time')
+                <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
+              </div>
                 </div>
                 <!-- /.card-body -->
                 <div class="card-footer">

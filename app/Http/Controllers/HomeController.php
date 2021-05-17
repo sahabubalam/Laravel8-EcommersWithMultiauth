@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Models\Category;
+use Auth;
 class HomeController extends Controller
 {
     /**
@@ -11,10 +12,10 @@ class HomeController extends Controller
      *
      * @return void
      */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
+    // public function __construct()
+    // {
+    //     $this->middleware('auth');
+    // }
 
     /**
      * Show the application dashboard.
@@ -23,7 +24,14 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $category=Category::all();
+
+        return view('welcome',compact('category'));
+    }
+    public function Logout()
+    {
+        Auth::logout();
+        return redirect()->to('/');
     }
     
 }

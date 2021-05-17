@@ -40,6 +40,35 @@
                     <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
                 </div>
+                <div class="form-group">
+                  <label for="exampleInputPassword1">Type </label>
+                  <select class="form-control @error('type') is-invalid @enderror" name="type">
+                    <option selected="true" disabled>select</option>
+                    <option value="value" <?php if($coupon->type=='value') echo "selected"; ?>>Value</option>
+                    <option value="percent" <?php if($coupon->type=='percent') echo "selected"; ?>>Percent</option>
+                  </select>
+                  @error('type')
+                  <div class="alert alert-danger">{{ $message }}</div>
+                  @enderror
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputPassword1">Min Order Amount</label>
+                  <input type="text" name="min_order_amount" value="{{$coupon->min_order_amount}}" class="form-control @error('min_order_amount') is-invalid @enderror" id="category_slug" placeholder="value">
+                  @error('min_order_amount')
+                  <div class="alert alert-danger">{{ $message }}</div>
+                  @enderror
+              </div>
+              <div class="form-group">
+                <label for="exampleInputPassword1">Is One Time </label>
+                <select class="form-control @error('is_one_time') is-invalid @enderror" name="is_one_time">
+                  <option selected="true" disabled>select</option>
+                  <option value="1" <?php if($coupon->is_one_time==1) echo "selected"; ?>>YES</option>
+                  <option value="0" <?php if($coupon->is_one_time==0) echo "selected"; ?>>NO</option>
+                </select>
+                @error('is_one_time')
+                <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
+              </div>
                 </div>
                 <!-- /.card-body -->
                 <div class="card-footer">
