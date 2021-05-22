@@ -5,6 +5,8 @@ use App\Http\Controllers\Frontend\CategoryController;
 use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\SslCommerzPaymentController;
+use App\Http\Controllers\Frontend\WishlistController;
+
 
 
 /*
@@ -50,5 +52,8 @@ Route::post('/success', [SslCommerzPaymentController::class, 'success']);
 Route::post('/fail', [SslCommerzPaymentController::class, 'fail']);
 Route::post('/cancel', [SslCommerzPaymentController::class, 'cancel']);
 //SSLCOMMERZ END 
-
+//wishlist
+Route::get('/wishlist/{id}', [WishlistController::class, 'addWishlist'])->name('wishlist')->middleware('auth');
+Route::get('/wishlist', [WishlistController::class, 'Wishlist'])->name('front.wishlist')->middleware('auth');
+Route::get('/add/cart/{id}', [WishlistController::class, 'addCart'])->name('add.cart')->middleware('auth');
 

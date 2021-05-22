@@ -75,6 +75,7 @@
                     </div>
                 </div>
             </div>
+
             <div class="col-lg-4">
                 <div class="cart__discount">
                     <h6>Discount codes</h6>
@@ -92,6 +93,7 @@
                     <a href="{{route('example2')}}" class="primary-btn">Place Order</a>
                 </div>
             </div>
+            
         </div>
     </div>
 </section>

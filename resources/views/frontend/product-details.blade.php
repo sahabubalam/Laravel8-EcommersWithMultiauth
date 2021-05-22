@@ -113,7 +113,7 @@
                             </div>
                         </form>
                         <div class="product__details__btns__option">
-                            <a href="#"><i class="fa fa-heart"></i> add to wishlist</a>
+                            <a href="{{route('wishlist',$product->id)}}"><i class="fa fa-heart"></i> add to wishlist</a>
                             <a href="#"><i class="fa fa-exchange"></i> Add To Compare</a>
                         </div>
                       

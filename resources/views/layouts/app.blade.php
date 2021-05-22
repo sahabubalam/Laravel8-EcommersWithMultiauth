@@ -83,7 +83,9 @@
                         <div class="header__top__right">
                             <div class="header__top__links">
                                 <a href="{{route('login')}}">Sign in</a>
-                                <a href="#">FAQs</a>
+                                @if(Auth::user())
+                                    <a href="#">{{Auth::user()->name}}</a>
+                                @endif
                                 <a href="{{route('logout')}}">Logout</a>
                             </div>
                             <div class="header__top__hover">
@@ -127,10 +129,17 @@
                         </ul>
                     </nav>
                 </div>
+
+
+@php
+$wishlist=App\Models\Wishlist::where('user_id',Auth::id())->get();
+    
+@endphp
+
                 <div class="col-lg-3 col-md-3">
                     <div class="header__nav__option">
                         <a href="#" class="search-switch"><img src="{{asset('frontend/img/icon/search.png')}}" alt=""></a>
-                        <a href="#"><img src="{{asset('frontend/img/icon/heart.png')}}" alt=""></a>
+                        <a href="{{route('front.wishlist')}}" ><img style="width:20px;padding:-8px" src="{{asset('frontend/img/icon/heart.png')}}"><span>{{count($wishlist)}}</span></a>
                         <a href="{{route('show-cart')}}"><img src="{{asset('frontend/img/icon/cart.png')}}" alt=""> <span>0</span></a>
                         <div class="price">$0.00</div>
                     </div>
